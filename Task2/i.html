@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>US States</title>
+
+<script>
+function searchSuggest(){
+
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.open("GET","us-states.xml",false);
+xmlhttp.send();
+xmlDoc=xmlhttp.responseXML; 
+
+var counter=0;
+var list="";
+
+
+var x=xmlDoc.getElementsByTagName("item");
+var b=document.getElementById("searchField").value;
+
+if(document.getElementById("searchField").disabled==false){
+ for(j=0;j<b.length;j++){
+ 	list="";
+	for (i=0;i<x.length;i++)
+  	{  
+  
+ var a=(x[i].getElementsByTagName("label")[0].childNodes[0].nodeValue);
+ 
+ 
+ var res1=a.toLowerCase();
+ var res2=b.toLowerCase();
+ 
+	
+ 
+ 	if(res2[j]!=res1[j]){
+ 		list+="";
+ 		}
+ 		
+ 	else if (j==0){   
+ 	
+ 			list+=res1;
+ 			list +="\n"; 
+ 	    }
+ 	
+ 	else if(res1[j]==res2[j]){
+ 		switch(j){
+ 		case 1:
+ 		if(res2[0]==res1[0]){
+ 		list+=res1;
+ 		list +="\n";
+ 		}
+ 		break;
+ 		case 2:
+ 		if(res2[0]==res1[0]&&res2[1]==res1[1]){
+ 		list+=res1;
+ 		list +="\n";
+ 		}
+ 		break;
+ 		case 3:
+ 		if(res2[0]==res1[0]&&res2[1]==res1[1]&&res2[2]==res1[2]){
+ 		list+=res1;
+ 		list +="\n";
+ 		}
+ 		break;
+ 		case 4:
+ 		if(res2[0]==res1[0]&&res2[1]==res1[1]&&res2[2]==res1[2]&&res1[3]==res2[3]){
+ 		list+=res1;
+ 		list +="\n";
+ 		}
+ 		break;
+ 		case 5:
+ 		if(res2[0]==res1[0]&&res2[1]==res1[1]&&res2[2]==res1[2]&&res1[3]==res2[3]&&res1[4]==res2[4]){
+ 		list+=res1;
+ 		list +="\n";
+ 		}
+ 		break;
+ 		case 6:
+ 		if(res2[0]==res1[0]&&res2[1]==res1[1]&&res2[2]==res1[2]&&res1[3]==res2[3]&&res1[4]==res2[4]&&res1[5]==res2[5]){
+ 		list+=res1;
+ 		list +="\n";
+ 		}
+ 		break;
+ 		case 7:
+ 		if(res2[0]==res1[0]&&res2[1]==res1[1]&&res2[2]==res1[2]&&res1[3]==res2[3]&&res1[4]==res2[4]&&res1[5]==res2[5]&&res1[6]==res2[6]){
+ 		list+=res1;
+ 		list +="\n";
+ 		}
+ 		break;
+ 		default:
+ 		list+=res1;
+ 		list +="\n";
+ 		}
+ 	}
+ 	}
+ 	    	
+ 	    	}
+ 	    	}
+ 	    	
+ 	   
+ 	    alert(list);
+ 	    
+ 	    var words = list.split(/[\r\n]+/).length-1;
+ 	    if(words==1){
+ 	    document.getElementById("searchField").value=list;
+ 	    document.getElementById("searchField").disabled=true;
+	}
+ 	}
+ 
+ 
+
+
+</script>
+
+</head>
+
+
+<body>
+
+ 
+
+Please enter your state:<br />
+    <input type="text" id="searchField" autocomplete="off" onkeyup="searchSuggest()"/> <br />
+
+
+</body>
+</html>
